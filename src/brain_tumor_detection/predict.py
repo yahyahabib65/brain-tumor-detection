@@ -1,21 +1,22 @@
 import pickle
+import re
+
+import easyocr
+import numpy as np
+import torch
+from PIL import Image
+from sklearn.preprocessing import StandardScaler
+
 from brain_tumor_detection.config import (
-    DEVICE,
-    FEATURE_COLUMNS,
-    MRI_MODEL_PATH,
-    SCALER_PATH,
-    TABULAR_MODEL_PATH,
+  DEVICE,
+  FEATURE_COLUMNS,
+  MRI_MODEL_PATH,
+  SCALER_PATH,
+  TABULAR_MODEL_PATH,
 )
 from brain_tumor_detection.dataset import get_mri_transforms
 from brain_tumor_detection.models import MRICNN, TabularMLP
-import numpy as np
-from PIL import Image
-from sklearn.preprocessing import StandardScaler
-import torch
-import re
-import easyocr
-import numpy as np
-from PIL import Image
+
 _ocr_reader = None
 
 

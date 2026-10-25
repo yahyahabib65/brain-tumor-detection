@@ -1,7 +1,8 @@
-from brain_tumor_detection.config import NUM_FEATURES
 import torch
-import torch.nn as nn
+from torch import nn
 from torchvision import models
+
+from brain_tumor_detection.config import NUM_FEATURES
 
 
 class TabularMLP(nn.Module):

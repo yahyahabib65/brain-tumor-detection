@@ -1,21 +1,22 @@
-from pathlib import Path
 import shutil
+from pathlib import Path
+
 import kagglehub
 import numpy as np
 import pandas as pd
-from PIL import Image
 import torch
+from PIL import Image
 from torch.utils.data import Dataset
 from torchvision import transforms
 
 from brain_tumor_detection.config import (
-    CSV_PATH,
-    DATA_DIR,
-    FEATURE_COLUMNS,
-    IMAGES_DIR,
-    IMAGE_SIZE,
-    KAGGLE_DATASET_SLUG,
-    TARGET_COLUMN,
+  CSV_PATH,
+  DATA_DIR,
+  FEATURE_COLUMNS,
+  IMAGE_SIZE,
+  IMAGES_DIR,
+  KAGGLE_DATASET_SLUG,
+  TARGET_COLUMN,
 )
 
 
@@ -50,8 +51,8 @@ class BrainTumorTabularDataset(Dataset):
   def __len__(self) -> int:
     return len(self.labels)
 
-  def __getitem__(self, idx: int) -> tuple[torch.Tensor, torch.Tensor]:
-    return self.features[idx], self.labels[idx]
+  def __getitem__(self, index: int) -> tuple[torch.Tensor, torch.Tensor]:
+    return self.features[index], self.labels[index]
 
 
 class BrainTumorMRIDataset(Dataset):
@@ -72,18 +73,17 @@ class BrainTumorMRIDataset(Dataset):
   def __len__(self) -> int:
     return len(self.labels)
 
-  def __getitem__(self, idx: int) -> tuple[torch.Tensor, torch.Tensor]:
-    img_name = str(self.image_names[idx])
+  def __getitem__(self, index: int) -> tuple[torch.Tensor, torch.Tensor]:
+    img_name = str(self.image_names[index])
     if not img_name.lower().endswith(".jpg"):
       img_name = f"{img_name}.jpg"
 
     img_path = self.img_dir / img_name
-    image = Image.open(img_path).convert("RGB")
+    pil_image = Image.open(img_path).convert("RGB")
 
-    if self.transform:
-      image = self.transform(image)
+    image_tensor: torch.Tensor = self.transform(pil_image)
 
-    return image, self.labels[idx]
+    return image_tensor, self.labels[index]
 
 
 def get_mri_transforms(

@@ -29,6 +29,9 @@ brain-tumor-detection = "brain_tumor_detection:main"
 [[tool.uv.index]]
 url = "https://pytorch.org/"
 
+[tool.ty.rules]
+invalid-mutable-override = "ignore"
+
 [build-system]
 requires = ["uv_build>=0.12.1,<0.13.0"]
 build-backend = "uv_build"

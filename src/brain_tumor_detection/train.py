@@ -1,32 +1,34 @@
 import pickle
-from brain_tumor_detection.config import (
-    ARTIFACTS_DIR,
-    BATCH_SIZE,
-    DEVICE,
-    EPOCHS_MRI,
-    EPOCHS_TABULAR,
-    FEATURE_COLUMNS,
-    IMAGE_COLUMN,
-    LEARNING_RATE,
-    MRI_MODEL_PATH,
-    RANDOM_SEED,
-    SCALER_PATH,
-    TABULAR_MODEL_PATH,
-    TARGET_COLUMN,
-    VAL_SPLIT,
-)
-from brain_tumor_detection.dataset import (
-    BrainTumorMRIDataset,
-    BrainTumorTabularDataset,
-    get_mri_transforms,
-    load_dataframe,
-)
-from brain_tumor_detection.models import MRICNN, TabularMLP
+
+import torch
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-import torch
-import torch.nn as nn
+from torch import nn
 from torch.utils.data import DataLoader
+
+from brain_tumor_detection.config import (
+  ARTIFACTS_DIR,
+  BATCH_SIZE,
+  DEVICE,
+  EPOCHS_MRI,
+  EPOCHS_TABULAR,
+  FEATURE_COLUMNS,
+  IMAGE_COLUMN,
+  LEARNING_RATE,
+  MRI_MODEL_PATH,
+  RANDOM_SEED,
+  SCALER_PATH,
+  TABULAR_MODEL_PATH,
+  TARGET_COLUMN,
+  VAL_SPLIT,
+)
+from brain_tumor_detection.dataset import (
+  BrainTumorMRIDataset,
+  BrainTumorTabularDataset,
+  get_mri_transforms,
+  load_dataframe,
+)
+from brain_tumor_detection.models import MRICNN, TabularMLP
 
 
 def evaluate(

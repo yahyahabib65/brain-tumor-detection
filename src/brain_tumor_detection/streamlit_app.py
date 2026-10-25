@@ -1,13 +1,15 @@
+import pandas as pd
+import streamlit as st
+from PIL import Image
+
 from brain_tumor_detection.config import CSV_PATH, FEATURE_COLUMNS
 from brain_tumor_detection.predict import (
-    load_mri_model,
-    load_tabular_artifacts,
-    predict_from_features,
-    predict_from_mri,
+  extract_features_from_report_image,
+  load_mri_model,
+  load_tabular_artifacts,
+  predict_from_features,
+  predict_from_mri,
 )
-import pandas as pd
-from PIL import Image
-import streamlit as st
 
 st.set_page_config(
     page_title="Brain Tumor Detection",
@@ -39,9 +41,9 @@ def render_prediction_banner(has_tumor: bool, prob: float) -> None:
   """Displays the diagnosis result and confidence metric."""
   confidence = prob if has_tumor else (1.0 - prob)
   if has_tumor:
-    st.error(f"### 🚨 Diagnosis: **Tumor Detected**")
+    st.error("### 🚨 Diagnosis: **Tumor Detected**")
   else:
-    st.success(f"### ✅ Diagnosis: **No Tumor Detected**")
+    st.success("### ✅ Diagnosis: **No Tumor Detected**")
 
   col1, col2 = st.columns(2)
   col1.metric("Prediction Confidence", f"{confidence:.2%}")
