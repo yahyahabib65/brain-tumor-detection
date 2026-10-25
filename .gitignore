@@ -1,0 +1,22 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments & caches
+.venv
+.ruff_cache/
+
+# Data & Model Artifacts
+data/
+artifacts/
+
+# Streamlit secrets (if ever added)
+.streamlit/secrets.toml
+
+# AI Agent / Editor directories
+.agents/
+.claude/
