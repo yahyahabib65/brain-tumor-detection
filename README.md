@@ -72,7 +72,7 @@ brain-tumor-detection/
 Clone the repository and sync the environment using `uv`:
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/yahyahabib65/brain-tumor-detection.git
 cd brain-tumor-detection
 uv sync
 ```
